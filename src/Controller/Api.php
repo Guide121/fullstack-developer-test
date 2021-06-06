@@ -21,15 +21,14 @@ class Api extends Request_m{
     public function cadastroProduto(){
         $this->conexao->beginTransaction();
         try{
-
             $this->dados = json_decode($this->json,true);
             $produto = new Produtos;
             $produto->nome = $this->dados['nome'];
             $produto->valor = floatval($this->dados['valor']);
             $produto->imagem = $this->dados['imagem'];
             $produto->cadastraProduto($this->conexao);
-
             $this->conexao->commit();
+            $this->retorno['data'] = ["id"=>$produto->id];
         } catch (\Throwable $e) {
             $this->conexao->rollBack();
             $this->retorno = ['message'=>$e->getMessage()];
@@ -68,8 +67,8 @@ class Api extends Request_m{
           $produto->valor = floatval($this->dados['valor']);
           $produto->imagem = $this->dados['imagem'];
           $produto->atualizaProduto($this->conexao);
-
           $this->conexao->commit();
+          $this->retorno['data'] = ["id"=>$produto->id];
       } catch (\Throwable $e) {
           $this->conexao->rollBack();
           $this->retorno = ['message'=>$e->getMessage()];

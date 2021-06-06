@@ -1,3 +1,4 @@
 # MAC OSX
 **/.DS_Store
 /vendor
+.vscode/launch.json

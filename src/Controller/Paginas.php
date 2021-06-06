@@ -2,40 +2,38 @@
 
 namespace Controller;
 
-use Cript\Cript;
-use GUMP;
-use Models\EventoDb;
-use Models\Produtos;
-use Models\vendedor;
+use Models\Conect;
+use Service\Produtos;
 
 class Paginas{
-   
     public function __construct($rota)
     {
-       $this->rota = $rota;       
+       $this->rota = $rota;
     }
 
-    public function home(){ 
-        require_once __DIR__."/../View/validacao.php"; 
-        
-    }
-    public function valida(){ 
-        require_once __DIR__."/../View/validacao.php"; 
-        
-    }
-   
-    public function cadastro($data){ 
-        require_once __DIR__."/../View/cadastro.php"; 
-        
-    }
-    
-    public function api(){ 
-        require_once __DIR__."/../View/api.php"; 
-        
+    public function home(){
+        $this->pagina = "produtos.php";
+        require_once __DIR__."/../View/templaite.php";
     }
 
-    public function erro($data){        
-        require_once __DIR__."/../View/erro.php";   
+
+    public function cadastro($data){
+      $produto = new Produtos;
+      if ($data['id_produto']) {
+          $produto->id = intval($data['id_produto']);
+          $produto->carregaProduto(Conect::abreConexao());
+      }
+      $this->pagina = "cadastro.php";
+      require_once __DIR__."/../View/templaite.php";
+    }
+
+    public function api(){
+      $this->pagina = "api.php";
+        require_once __DIR__."/../View/templaite.php";
+    }
+
+    public function erro($data){
+        require_once __DIR__."/../View/erro.php";
     }
 }
 ?>

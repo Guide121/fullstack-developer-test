@@ -39,6 +39,22 @@ class Produtos extends Produto
     return true;
   }
 
+  public function carregaProduto(PDO $conexao){
+    $exec = $conexao->prepare("SELECT produtos.id,
+                                  produtos.nome,
+                                  produtos.valor,
+                                  produtos.imagem
+                                FROM produtos
+                                WHERE produtos.id = :id");
+    $exec->bindParam(":id",$this->id,PDO::PARAM_INT);
+    $exec->execute();
+    if($dados =  $exec->fetch(PDO::FETCH_ASSOC)){
+      $this->id = $dados['id'];
+      $this->nome = $dados['nome'];
+      $this->valor = floatval($dados['valor']);
+    }
+  }
+
   public function consultaProduto(PDO $conexao){
     $complemento = '';
     if($this->id)

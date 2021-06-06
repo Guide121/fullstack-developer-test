@@ -15,6 +15,6 @@ define("DATA_LAYER_CONFIG", [
     ]
 ]);
 
-define("URL_SITE", "http://localhost:8080/projeto/");
+define("URL_SITE", "http://localhost:8080/fullstack-developer-test/");
 
 ?>
