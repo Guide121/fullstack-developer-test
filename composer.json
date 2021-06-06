@@ -1,0 +1,19 @@
+{
+    "name": "jose/projeto",
+
+    "config":{
+        "vendor-dir": "vendor"
+    },
+    "autoload":{
+        "psr-4":{
+        "Controller\\":"src/Controller/",
+        "Models\\":"src/Models/",
+        "Service\\":"src/Service/"
+        },
+        "files":["src/Config.php"]
+    },
+    "require": {
+        "coffeecode/router": "^1.0",
+        "symfony/http-foundation": "^5.1"
+    }
+}
